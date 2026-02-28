@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎬 Recomendação de Filmes</title>
+    <link rel="stylesheet" href="/public/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎬 Recomendação de Filmes</h1>
+            <p class="header-subtitle">Descubra filmes que você vai amar</p>
+        </header>
+
+        <div class="card-section">
+            <div class="section-title">🎥 Filmes Disponíveis</div>
+            <div class="movies-grid" id="moviesGrid"></div>
+        </div>
+
+        <div class="card-section">
+            <div class="section-title">✨ Obter Recomendações</div>
+            <form id="testForm">
+                <div class="form-group">
+                    <div class="form-row">
+                        <label for="userSelect">🧑 Usuário de treino:</label>
+                        <select id="userSelect">
+                            <option value="">Selecione um usuário</option>
+                        </select>
+                    </div>
+                    <div class="selected-user-box">
+                        <div class="helper-text">Filmes selecionados do usuário:</div>
+                        <div id="selectedUserSummary" class="selected-user-summary"></div>
+                        <div id="selectedUserMovies" class="selected-user-movies"></div>
+                    </div>
+                    <div class="form-row">
+                        <label for="age">👤 Sua Idade:</label>
+                        <input type="number" id="age" value="25" min="1" max="120">
+                    </div>
+                    <div class="form-row">
+                        <label for="watched">🎞️ Filmes Assistidos:</label>
+                        <input type="text" id="watched" value="" placeholder="ex: 1,2,3">
+                    </div>
+                    <p class="helper-text">Clique nos filmes da seção acima para marcar os que você já assistiu, ou digite os IDs separados por vírgula.</p>
+                </div>
+                <div class="button-group">
+                    <button type="button" id="trainBtn">▶️ Treinar modelo</button>
+                    <button type="submit">🎯 Recomendar</button>
+                    <button type="button" id="clearSelectionBtn">🧹 Limpar seleção</button>
+                </div>
+                <div id="status"></div>
+            </form>
+        </div>
+
+        <div class="card-section">
+            <div class="section-title">🌟 Recomendações para você</div>
+            <ul id="results">
+                <div class="empty-state">As recomendações aparecerão aqui</div>
+            </ul>
+        </div>
+    </div>
+
+    <script src="/public/main.js"></script>
+</body>
+</html>

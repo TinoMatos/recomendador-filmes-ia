@@ -1,0 +1,341 @@
+[
+  {
+    "id": 1,
+    "title": "Avatar",
+    "year": 2009,
+    "rating": 7.8,
+    "genres": [
+      "sci-fi",
+      "action"
+    ],
+    "budget": 237000000,
+    "revenue": 2923706993,
+    "runtime": 162,
+    "vote_count": 24505,
+    "popularity": 150.437577,
+    "poster": "data/posters/movie-1.jpg",
+    "description": "Um marinheiro paralítico é enviado como espião para o planeta Pandora, onde descobre um amor proibido e a verdadeira natureza do conflito."
+  },
+  {
+    "id": 2,
+    "title": "Titanic",
+    "year": 1997,
+    "rating": 7.9,
+    "genres": [
+      "romance",
+      "drama"
+    ],
+    "budget": 200000000,
+    "revenue": 2257844680,
+    "runtime": 194,
+    "vote_count": 25886,
+    "popularity": 111.626107,
+    "poster": "data/posters/movie-2.jpg",
+    "description": "A história do navio Titanic e o romance entre um jovem pobre e uma mulher rica em sua viagem fatal."
+  },
+  {
+    "id": 3,
+    "title": "Batman: O Cavaleiro das Trevas",
+    "year": 2008,
+    "rating": 9,
+    "genres": [
+      "action",
+      "crime"
+    ],
+    "budget": 185000000,
+    "revenue": 1005045668,
+    "runtime": 152,
+    "vote_count": 28546,
+    "popularity": 98.278015,
+    "poster": "data/posters/movie-3.jpg",
+    "description": "Batman enfrenta seu maior inimigo, o Coringa, que torna Gotham City em caos completo."
+  },
+  {
+    "id": 4,
+    "title": "A Origem",
+    "year": 2010,
+    "rating": 8.8,
+    "genres": [
+      "sci-fi",
+      "action"
+    ],
+    "budget": 160000000,
+    "revenue": 839292587,
+    "runtime": 148,
+    "vote_count": 33402,
+    "popularity": 33.406982,
+    "poster": "data/posters/movie-4.jpg",
+    "description": "Um especialista em roubo de segredos através de sonhos compartilhados tem a oportunidade de ter seu crime perdoado se conseguir fazer o oposto: implantar uma ideia."
+  },
+  {
+    "id": 5,
+    "title": "Um Sonho de Liberdade",
+    "year": 1994,
+    "rating": 9.3,
+    "genres": [
+      "drama"
+    ],
+    "budget": 25000000,
+    "revenue": 58300000,
+    "runtime": 142,
+    "vote_count": 20819,
+    "popularity": 61.819439,
+    "poster": "data/posters/movie-5.jpg",
+    "description": "Dois homens presos estabelecem uma amizade duradoura enquanto conspiram para escapar de uma prisão de segurança máxima."
+  },
+  {
+    "id": 6,
+    "title": "Pulp Fiction: Tempo de Violência",
+    "year": 1994,
+    "rating": 8.9,
+    "genres": [
+      "crime",
+      "drama"
+    ],
+    "budget": 8000000,
+    "revenue": 213959223,
+    "runtime": 154,
+    "vote_count": 20553,
+    "popularity": 50.419685,
+    "poster": "data/posters/movie-6.jpg",
+    "description": "As vidas de dois assassinos de máfia, uma boxer, a esposa de um gângster e um par de bandidos viajantes se entrelaçam de forma não-linear."
+  },
+  {
+    "id": 7,
+    "title": "Forrest Gump: O Contador de Histórias",
+    "year": 1994,
+    "rating": 8.8,
+    "genres": [
+      "drama",
+      "romance"
+    ],
+    "budget": 55000000,
+    "revenue": 678226205,
+    "runtime": 142,
+    "vote_count": 21854,
+    "popularity": 30.324743,
+    "poster": "data/posters/movie-7.jpg",
+    "description": "A história de um homem com baixa inteligência que presencia eventos históricos importantes durante a segunda metade da história americana."
+  },
+  {
+    "id": 8,
+    "title": "Matrix",
+    "year": 1999,
+    "rating": 8.7,
+    "genres": [
+      "sci-fi",
+      "action"
+    ],
+    "budget": 63000000,
+    "revenue": 467222728,
+    "runtime": 136,
+    "vote_count": 22598,
+    "popularity": 35.246647,
+    "poster": "data/posters/movie-8.jpg",
+    "description": "Um hacker descobre a verdade sobre sua realidade e se junta a uma rebelião contra aqueles que a controlam."
+  },
+  {
+    "id": 9,
+    "title": "Interestelar",
+    "year": 2014,
+    "rating": 8.6,
+    "genres": [
+      "sci-fi",
+      "drama"
+    ],
+    "budget": 165000000,
+    "revenue": 731208629,
+    "runtime": 169,
+    "vote_count": 31848,
+    "popularity": 19.839816,
+    "poster": "data/posters/movie-9.jpg",
+    "description": "Um grupo de astronautas viaja através de um buraco de minhoca próximo a Saturno em busca de um novo lar para a humanidade."
+  },
+  {
+    "id": 10,
+    "title": "O Poderoso Chefão",
+    "year": 1972,
+    "rating": 9.2,
+    "genres": [
+      "crime",
+      "drama"
+    ],
+    "budget": 6000000,
+    "revenue": 250000000,
+    "runtime": 175,
+    "vote_count": 18563,
+    "popularity": 65.521615,
+    "poster": "data/posters/movie-10.jpg",
+    "description": "O envelhecido patriarca de uma dinastia do crime organizado transfere o controle de seu império clandestino para o filho mais jovem."
+  },
+  {
+    "id": 11,
+    "title": "O Poderoso Chefão: Parte II",
+    "year": 1974,
+    "rating": 9,
+    "genres": [
+      "crime",
+      "drama"
+    ],
+    "budget": 13000000,
+    "revenue": 93000000,
+    "runtime": 202,
+    "vote_count": 12347,
+    "popularity": 46.008763,
+    "poster": "data/posters/movie-11.jpg",
+    "description": "A continuação parallela que mostra tanto as origens de Vito Corleone quanto a ascensão de seu filho ao poder."
+  },
+  {
+    "id": 12,
+    "title": "Batman: O Cavaleiro das Trevas Ressurge",
+    "year": 2012,
+    "rating": 8.5,
+    "genres": [
+      "action",
+      "crime"
+    ],
+    "budget": 250000000,
+    "revenue": 1081041287,
+    "runtime": 164,
+    "vote_count": 25746,
+    "popularity": 23.901572,
+    "poster": "data/posters/movie-12.jpg",
+    "description": "Batman volta para vencer um novo inimigo perigoso que o desafia em uma batalha épica."
+  },
+  {
+    "id": 13,
+    "title": "Clube da Luta",
+    "year": 1999,
+    "rating": 8.8,
+    "genres": [
+      "drama",
+      "thriller"
+    ],
+    "budget": 63000000,
+    "revenue": 100853753,
+    "runtime": 139,
+    "vote_count": 26328,
+    "popularity": 44.254699,
+    "poster": "data/posters/movie-13.jpg",
+    "description": "Um exemplo insatisfeito forma um clube de luta subterrânea que evolui para muito mais do que ninguém esperava."
+  },
+  {
+    "id": 14,
+    "title": "Gladiador",
+    "year": 2000,
+    "rating": 8.5,
+    "genres": [
+      "action",
+      "drama"
+    ],
+    "budget": 103000000,
+    "revenue": 460583960,
+    "runtime": 155,
+    "vote_count": 18819,
+    "popularity": 41.625153,
+    "poster": "data/posters/movie-14.jpg",
+    "description": "Um ex-general romano é escravizado e deve lutar por sua liberdade no sangrento arco de Roma."
+  },
+  {
+    "id": 15,
+    "title": "O Rei Leão",
+    "year": 1994,
+    "rating": 8.5,
+    "genres": [
+      "animation",
+      "family"
+    ],
+    "budget": 45000000,
+    "revenue": 960943282,
+    "runtime": 88,
+    "vote_count": 18337,
+    "popularity": 50.883246,
+    "poster": "data/posters/movie-15.jpg",
+    "description": "Um jovem leão é exilado e encorajado a voltar e reivindicar seu trono por um sábio sapo e um porco-espinho."
+  },
+  {
+    "id": 16,
+    "title": "Toy Story: Um Mundo de Aventuras",
+    "year": 1995,
+    "rating": 8.3,
+    "genres": [
+      "animation",
+      "family"
+    ],
+    "budget": 30000000,
+    "revenue": 373554033,
+    "runtime": 81,
+    "vote_count": 16725,
+    "popularity": 47.234189,
+    "poster": "data/posters/movie-16.jpg",
+    "description": "Um boneco cowboy é zelosamente substituído por um novo espaçonave de brinquedo e, involuntariamente, a dois se veem em uma jornada."
+  },
+  {
+    "id": 17,
+    "title": "Os Vingadores",
+    "year": 2012,
+    "rating": 8,
+    "genres": [
+      "action",
+      "sci-fi"
+    ],
+    "budget": 220000000,
+    "revenue": 1520640972,
+    "runtime": 143,
+    "vote_count": 32698,
+    "popularity": 67.402074,
+    "poster": "data/posters/movie-17.jpg",
+    "description": "Os heróis mais poderosos da Terra devem se unir para lutar contra um inimigo inesperado que ameaça sua existência."
+  },
+  {
+    "id": 18,
+    "title": "Parque dos Dinossauros",
+    "year": 1993,
+    "rating": 8.2,
+    "genres": [
+      "sci-fi",
+      "adventure"
+    ],
+    "budget": 63000000,
+    "revenue": 1019467855,
+    "runtime": 127,
+    "vote_count": 19560,
+    "popularity": 32.647,
+    "poster": "data/posters/movie-18.jpg",
+    "description": "Um grupo de cientistas traz dinossauros extintos de volta à vida em um parque temático, mas as coisas saem do controle."
+  },
+  {
+    "id": 19,
+    "title": "À Espera de um Milagre",
+    "year": 1999,
+    "rating": 8.6,
+    "genres": [
+      "drama",
+      "crime"
+    ],
+    "budget": 60000000,
+    "revenue": 286801374,
+    "runtime": 189,
+    "vote_count": 13936,
+    "popularity": 33.565256,
+    "poster": "data/posters/movie-19.jpg",
+    "description": "A história de abuso e solidariedade em uma ala de morte de uma prisão sul-americana durante a Depressão."
+  },
+  {
+    "id": 20,
+    "title": "A Lista de Schindler",
+    "year": 1993,
+    "rating": 9,
+    "genres": [
+      "history",
+      "drama"
+    ],
+    "budget": 32000000,
+    "revenue": 321234432,
+    "runtime": 195,
+    "vote_count": 11321,
+    "popularity": 39.231256,
+    "poster": "data/posters/movie-20.jpg",
+    "description": "Na Polônia ocupada pelos nazistas, um industrialista alemão trabalha para poupar seus trabalhadores judeus."
+  }
+]
