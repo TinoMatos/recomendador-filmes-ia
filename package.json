@@ -5,7 +5,11 @@
   "description": "Projeto de recomendação de filmes com TF.js",
   "scripts": {
     "start": "node start.js",
-    "import:data": "node import-data.js"
+    "import:data": "node import-data.js",
+    "test": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.58.2"
   },
   "dependencies": {
     "pg": "^8.19.0"
