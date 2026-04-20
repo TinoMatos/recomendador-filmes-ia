@@ -9,6 +9,76 @@ const workerEvents = {
 let _globalCtx = {};
 let _model = null;
 
+const IDB_NAME = 'movie-rec';
+const IDB_STORE = 'data';
+const CTX_KEY = 'ctx';
+
+function idbOpen() {
+    return new Promise((resolve, reject) => {
+        const req = indexedDB.open(IDB_NAME, 1);
+        req.onupgradeneeded = e => e.target.result.createObjectStore(IDB_STORE);
+        req.onsuccess = e => resolve(e.target.result);
+        req.onerror = () => reject(req.error);
+    });
+}
+
+async function idbSet(key, value) {
+    const db = await idbOpen();
+    return new Promise((resolve, reject) => {
+        const tx = db.transaction(IDB_STORE, 'readwrite');
+        tx.objectStore(IDB_STORE).put(value, key);
+        tx.oncomplete = resolve;
+        tx.onerror = () => reject(tx.error);
+    });
+}
+
+async function idbGet(key) {
+    const db = await idbOpen();
+    return new Promise((resolve, reject) => {
+        const tx = db.transaction(IDB_STORE, 'readonly');
+        const req = tx.objectStore(IDB_STORE).get(key);
+        req.onsuccess = () => resolve(req.result);
+        req.onerror = () => reject(req.error);
+    });
+}
+
+async function saveModelToStorage(model, ctx) {
+    try {
+        await model.save(`indexeddb://${IDB_NAME}-model`);
+        const ctxToSave = {
+            minAge: ctx.minAge, maxAge: ctx.maxAge,
+            minYear: ctx.minYear, maxYear: ctx.maxYear,
+            minRating: ctx.minRating, maxRating: ctx.maxRating,
+            genres: ctx.genres,
+            genreIndex: ctx.genreIndex,
+            movieAvgAgeNorm: ctx.movieAvgAgeNorm,
+            movies: ctx.movies,
+            users: ctx.users,
+        };
+        await idbSet(CTX_KEY, ctxToSave);
+    } catch (e) {
+        console.warn('Não foi possível persistir modelo:', e);
+    }
+}
+
+async function loadSavedModel() {
+    try {
+        const model = await tf.loadLayersModel(`indexeddb://${IDB_NAME}-model`);
+        const ctx = await idbGet(CTX_KEY);
+        if (!ctx) {
+            model.dispose();
+            postMessage({ type: 'model:not-found' });
+            return;
+        }
+        ctx.movieById = Object.fromEntries(ctx.movies.map(m => [m.id, m]));
+        _model = model;
+        _globalCtx = ctx;
+        postMessage({ type: 'model:loaded', stats: { movies: ctx.movies.length, users: ctx.users.length } });
+    } catch {
+        postMessage({ type: 'model:not-found' });
+    }
+}
+
 // Fallback de dataset, usado caso o frontend não envie filmes no treino.
 const DATASET_URL = new URL('/data/movies_tmdb.json', self.location.origin).href;
 
@@ -288,16 +358,32 @@ async function trainModel({ users, movies }) {
         const xs = tf.tensor2d(dataset.features, [dataset.features.length, inputSize], 'float32');
         const ys = tf.tensor2d(dataset.labels, [dataset.labels.length, 1], 'float32');
 
+        const totalEpochs = 100;
         _model = buildModel(inputSize);
         await _model.fit(xs, ys, {
-            epochs: 100,
+            epochs: totalEpochs,
             batchSize: 32,
             shuffle: true,
             verbose: 0,
+            callbacks: {
+                onEpochEnd: (epoch, logs) => {
+                    if (epoch % 5 === 0 || epoch === totalEpochs - 1) {
+                        postMessage({
+                            type: 'training:progress',
+                            epoch: epoch + 1,
+                            totalEpochs,
+                            loss: logs.loss?.toFixed(4),
+                            acc: logs.acc?.toFixed(3),
+                        });
+                    }
+                },
+            },
         });
 
         xs.dispose();
         ys.dispose();
+
+        await saveModelToStorage(_model, _globalCtx);
 
         postMessage({
             type: workerEvents.trainingComplete,
@@ -371,9 +457,8 @@ async function recommend({ user }) {
 const handlers = {
     [workerEvents.trainModel]: trainModel,
     [workerEvents.recommend]: recommend,
-
-
     trainModel,
+    'load:model': loadSavedModel,
 };
 
 self.onmessage = async (e) => {

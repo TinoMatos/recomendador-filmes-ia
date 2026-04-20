@@ -18,6 +18,22 @@ const clearSelectionBtn = document.getElementById('clearSelectionBtn');
 const trainBtn = document.getElementById('trainBtn');
 const ageInput = document.getElementById('age');
 const testForm = document.getElementById('testForm');
+const trainingProgress = document.getElementById('trainingProgress');
+const progressBar = document.getElementById('progressBar');
+const progressLabel = document.getElementById('progressLabel');
+const progressLoss = document.getElementById('progressLoss');
+
+function showProgress(epoch, totalEpochs, loss, acc) {
+    trainingProgress.style.display = 'block';
+    progressBar.style.width = `${Math.round((epoch / totalEpochs) * 100)}%`;
+    progressLabel.textContent = `Época ${epoch} / ${totalEpochs}`;
+    progressLoss.textContent = loss ? `Loss: ${loss}${acc ? ` • Acc: ${acc}` : ''}` : '';
+}
+
+function hideProgress() {
+    trainingProgress.style.display = 'none';
+    progressBar.style.width = '0%';
+}
 
 const GENRE_LABELS_PT = {
     action: 'Ação',
@@ -386,18 +402,29 @@ userSelect.addEventListener('change', () => {
 });
 
 worker.onmessage = e => {
-    const { type, recommendations, stats, message } = e.data;
+    const { type, recommendations, stats, message, epoch, totalEpochs, loss, acc } = e.data;
     if (type === 'training:start') {
         status.textContent = '⏳ Treinando modelo de IA...';
+        showProgress(0, 100, null, null);
+    }
+    if (type === 'training:progress') {
+        showProgress(epoch, totalEpochs, loss, acc);
     }
     if (type === 'training:complete' || type === 'trainingComplete') {
         clearTrainingTimeout();
         setTrainingState(false);
+        hideProgress();
         isModelTrained = true;
-        status.textContent = `✅ Treinamento concluído (${stats?.movies || allMovies.length} filmes, ${stats?.users || 0} usuários).`;
-        setTimeout(() => {
-            status.textContent = '';
-        }, 3000);
+        status.textContent = `✅ Treinamento concluído (${stats?.movies || allMovies.length} filmes, ${stats?.users || 0} usuários). Modelo salvo.`;
+        setTimeout(() => { status.textContent = ''; }, 4000);
+    }
+    if (type === 'model:loaded') {
+        isModelTrained = true;
+        status.textContent = `✅ Modelo anterior carregado (${stats?.movies || 0} filmes, ${stats?.users || 0} usuários).`;
+        setTimeout(() => { status.textContent = ''; }, 4000);
+    }
+    if (type === 'model:not-found') {
+        status.textContent = '';
     }
     if (type === 'recommend') {
         displayRecommendations(recommendations);
@@ -405,6 +432,7 @@ worker.onmessage = e => {
     if (type === 'error') {
         clearTrainingTimeout();
         setTrainingState(false);
+        hideProgress();
         status.textContent = `❌ ${message}`;
     }
 };
@@ -416,17 +444,27 @@ function displayRecommendations(recommendations) {
         return;
     }
 
-    recommendations.forEach(r => {
+    recommendations.forEach((r, index) => {
         const movie = allMovies.find(m => m.id === r.id);
         if (!movie) return;
 
+        const confidence = r.confidence ?? Math.round(r.score * 100);
         const li = document.createElement('li');
         li.className = 'result-item';
         li.innerHTML = `
+            <div class="result-rank">${index + 1}</div>
             <img src="${movie.poster}" alt="${movie.title}" class="result-image">
             <div class="result-title">${movie.title}</div>
-            <div style="font-size:0.8rem;color:#666;margin-bottom:0.5rem;">${movie.year} • ⭐ ${movie.rating} • ${formatGenresPt(movie.genres)}</div>
-            <div class="result-score">Compatibilidade: ${r.confidence ?? Math.round(r.score * 100)}%</div>
+            <div class="result-meta">${movie.year} · ⭐ ${movie.rating} · ${formatGenresPt(movie.genres)}</div>
+            <div class="result-score-wrap">
+                <div class="result-score-label">
+                    <span>Compatibilidade</span>
+                    <span>${confidence}%</span>
+                </div>
+                <div class="result-score-track">
+                    <div class="result-score-fill" style="width:${confidence}%"></div>
+                </div>
+            </div>
         `;
         const resultImage = li.querySelector('.result-image');
         resultImage.onerror = () => {
@@ -515,3 +553,5 @@ loadMovies();
 loadTrainingUsers();
 renderSelectedUserSummary(null);
 renderSelectedUserMovies(null);
+status.textContent = '⏳ Verificando modelo salvo...';
+worker.postMessage({ action: 'load:model' });
